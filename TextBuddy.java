@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 //Assuming that file IO is 	the only commands are delete,display,add,clear and exit. No other invalid input
@@ -156,6 +157,11 @@ public class TextBuddy {
 		writer.close();
 		System.out.println("all content deleted from " +outputFileName);
 		
+	}
+	
+	public ArrayList<String> sortList(ArrayList<String> list){
+		Collections.sort(list);
+		return list;
 	}
 	
 }
