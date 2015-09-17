@@ -1,72 +1,40 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 
 public class TextBuddyTest {
 
+	
+	
 	@Test
-	public void testMain() {
-		fail("Not yet implemented");
+	public void testsortList(){
+		TextBuddy tb =  new TextBuddy();
+		
+		//Creating the unsorted arrayList
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("singapore");
+		test.add("America");
+		test.add("holland");
+		test.add("austria");
+		test.add("britain");
+		
+		//Creating the expected sorted list
+		ArrayList<String> expectedList = new ArrayList<String>();
+		expectedList.add("America");
+		expectedList.add("austria");
+		expectedList.add("britain");
+		expectedList.add("holland");
+		expectedList.add("singapore");
+		
+		//Checking if the expectedList matches the test list sorted by TextBuddy.sortList method
+		assertEquals(expectedList,tb.sortList(test));
 	}
-
+	
 	@Test
-	public void testCreateFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFetchFromFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testProcessInput() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testStopProgram() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSaveFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddToFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCommand() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetArgument() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddNewEntry() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDisplayAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDeleteEntry() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testClearAll() {
+	public void testSearchList(){
 		fail("Not yet implemented");
 	}
 
