@@ -15,6 +15,7 @@ public class TextBuddy {
 	private static String outputFileName="null";
 	private static boolean contProgram = true;
 	private static ArrayList<String> data = new ArrayList<String>();
+	private static ArrayList<String> searchList;
 	public static void main(String[] args) throws IOException {
 		outputFileName= args[0];
 		//call createFile method to check if the file exist
@@ -57,7 +58,7 @@ public class TextBuddy {
 		FileReader reader = new FileReader(f);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String line;
-		//Scanning all lines inside the text file into arraylist
+		//Scanning all lines inside the text file into arrayList
 		while ((line = bufferedReader.readLine()) != null) {
 			data.add(line);
 		}
@@ -79,14 +80,51 @@ public class TextBuddy {
 		return;
 	}
 	
+	public static void getCommand(String input) throws IOException{
+		
+		if(input.contains("add")){
+			String argument = getArgument(input);
+			addNewEntry(argument);
+		}
+		else if(input.contains("display")){
+			display(data);
+		}
+		else if(input.contains("delete")){
+			String argument = getArgument(input);
+			int index = Integer.parseInt(argument)-1;
+			deleteEntry(index);
+		}
+		else if(input.contains("sort")){
+			data =  sortList(data);
+			display(data);
+			saveFile();
+		}
+		else if(input.contains("search")){
+			String argument = getArgument(input);
+			searchList = searchList(data, argument);
+			display(searchList);
+		}
+		//The only possible command is clear, since it is neither of the above
+		else{
+			clearAll();
+		}
+		
+	}
+	
 	public static void saveFile() throws IOException{
-		//Overwriting the entire file with the updated data arraylist
+		//Overwriting the entire file with the updated data arrayList
 		FileWriter writer = new FileWriter(outputFileName,false);
 		for(int i =0;i<data.size();i++){
 			writer.write(data.get(i) + System.getProperty( "line.separator" ));
 		}
 		writer.close();
 			
+	}
+	
+	public static void addNewEntry(String arg) throws IOException{
+		data.add(arg);
+		addToFile(arg);
+		System.out.println("added to " +outputFileName + ": \"" + arg +"\"");
 	}
 	
 	public static void addToFile(String arg) throws IOException{
@@ -97,26 +135,6 @@ public class TextBuddy {
 			
 	}
 	
-	public static void getCommand(String input) throws IOException{
-			
-		if(input.contains("add")){
-			String argument = getArgument(input);
-			addNewEntry(argument);
-		}
-		else if(input.contains("display")){
-			displayAll();
-		}
-		else if(input.contains("delete")){
-			String argument = getArgument(input);
-			int index = Integer.parseInt(argument)-1;
-			deleteEntry(index);
-		}
-		//The only possible command is clear, since it is neither of the 4 above
-		else{
-			clearAll();
-		}
-		
-	}
 	
 	public static String getArgument(String input){
 		//Using the whitespace divider to find the index of the start of the argument
@@ -124,19 +142,15 @@ public class TextBuddy {
 		return input.substring(indexOfArg);
 	}
 	
-	public static void addNewEntry(String arg) throws IOException{
-		data.add(arg);
-		addToFile(arg);
-		System.out.println("added to " +outputFileName + ": \"" + arg +"\"");
-	}
 	
-	public static void displayAll(){
+	
+	public static void display(ArrayList<String> list){
 		//If array is zero
-		if(data.size()==0)
+		if(list.size()==0)
 			System.out.println(outputFileName + " is empty");
 		else{
-			for(int i=0;i<data.size();i++){
-				System.out.println(i+1 +". " +data.get(i));
+			for(int i=0;i<list.size();i++){
+				System.out.println(i+1 +". " +list.get(i));
 			}
 		}
 	}
@@ -159,12 +173,12 @@ public class TextBuddy {
 		
 	}
 	
-	public ArrayList<String> sortList(ArrayList<String> list){
+	public static ArrayList<String> sortList(ArrayList<String> list){
 		Collections.sort(list);
 		return list;
 	}
 	
-	public ArrayList<String> searchList(ArrayList<String> list, String word){
+	public static ArrayList<String> searchList(ArrayList<String> list, String word){
 		
 		ArrayList<String> results = new ArrayList<String>();
 		word = word.toLowerCase();
@@ -177,6 +191,7 @@ public class TextBuddy {
 				results.add(currentLine);
 			}	
 		}
+		System.out.println("Search results for: " +word);
 		return results;
 	}
 	
