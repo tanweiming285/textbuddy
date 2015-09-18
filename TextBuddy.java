@@ -167,11 +167,13 @@ public class TextBuddy {
 	public ArrayList<String> searchList(ArrayList<String> list, String word){
 		
 		ArrayList<String> results = new ArrayList<String>();
+		word = word.toLowerCase();
 		
 		//Looping through the entire list, and calling contains method on each String in the list
 		for(int i = 0;i<list.size();i++){
 			String currentLine = list.get(i);
-			if(currentLine.contains(word)){
+			String lowCaseCurrent = currentLine.toLowerCase();
+			if(lowCaseCurrent.contains(word)){
 				results.add(currentLine);
 			}	
 		}
