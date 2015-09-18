@@ -35,7 +35,21 @@ public class TextBuddyTest {
 	
 	@Test
 	public void testSearchList(){
-		fail("Not yet implemented");
+		TextBuddy tb =  new TextBuddy();
+		
+		//Creating the test arrayList
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("cat");
+		test.add("bad cat");
+		test.add("dog");
+		
+		//Creating the expected search results when I look for "cat" in the test list
+		ArrayList<String> expectedList = new ArrayList<String>();
+		expectedList.add("cat");
+		expectedList.add("bad cat");
+		
+		assertEquals(expectedList,tb.searchList(test,"cat"));
+		
 	}
 
 }
