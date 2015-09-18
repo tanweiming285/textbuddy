@@ -164,4 +164,18 @@ public class TextBuddy {
 		return list;
 	}
 	
+	public ArrayList<String> searchList(ArrayList<String> list, String word){
+		
+		ArrayList<String> results = new ArrayList<String>();
+		
+		//Looping through the entire list, and calling contains method on each String in the list
+		for(int i = 0;i<list.size();i++){
+			String currentLine = list.get(i);
+			if(currentLine.contains(word)){
+				results.add(currentLine);
+			}	
+		}
+		return results;
+	}
+	
 }
